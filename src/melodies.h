@@ -35,6 +35,9 @@ const Note melodyTetris[] = {
   {NOTE_D5, 400}, {NOTE_C5, 200}, {NOTE_B4, 200},
   {NOTE_A4, 400}, {NOTE_A4, 200}, {NOTE_C5, 200},
   {NOTE_E5, 400}, {NOTE_D5, 200}, {NOTE_C5, 200},
+  {NOTE_B4, 400}, {NOTE_C5, 200}, {NOTE_D5, 400},
+  {NOTE_E5, 400}, {NOTE_C5, 400}, {NOTE_A4, 400},
+  {NOTE_A4, 400},
 };
 
 const Melody MELODY_TETRIS = {
