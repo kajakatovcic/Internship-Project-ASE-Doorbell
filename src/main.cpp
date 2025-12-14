@@ -143,14 +143,7 @@ void loop() {
             break;
 
         case STATE_SIREN:
-            updateMelody();
-
-            if (sirenBtn.stableState == LOW) {
-                stopMelody();
-                digitalWrite(LED_SIREN, LOW);
-                inPause = false;
-                state = door.stableState ? STATE_DOOR_ALERT : STATE_IDLE;
-            }
-            break;
+            updateMelody(); 
+            break; //Siren will loop forever until hardware reset
     }
 }
