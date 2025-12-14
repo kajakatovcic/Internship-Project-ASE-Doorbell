@@ -62,6 +62,12 @@ void loop() {
     switch (state) {
 
         case STATE_IDLE:
+            if (sirenBtn.stableState == HIGH) {
+                playMelodyLoop(MELODY_SIREN);
+                digitalWrite(LED_SIREN, HIGH);
+                state = STATE_SIREN;
+                break;
+            }
             if (door.stableState == HIGH) {
                 playMelodyOnce(getNextDoorMelody());
                 digitalWrite(LED_DOOR, HIGH);

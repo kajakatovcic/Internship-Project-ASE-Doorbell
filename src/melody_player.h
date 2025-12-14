@@ -23,6 +23,18 @@ inline void playMelodyOnce(const Melody &melody) {
   else tone(BUZZER_PWM, pitch);
 }
 
+inline void playMelodyLoop(const Melody &melody) {
+  currentMelody = &melody;
+  melodyIndex = 0;
+  noteStartTime = millis(); 
+  melodyActive = true;
+  melodyFinished = false;
+
+  uint16_t pitch = melody.notes[0].pitch;
+  if (pitch == NOTE_REST) noTone(BUZZER_PWM);
+  else tone(BUZZER_PWM, pitch);
+}
+
 inline void stopMelody() {
   noTone(BUZZER_PWM);
   melodyActive = false;
@@ -37,10 +49,14 @@ inline void updateMelody() {
     noteStartTime = millis();
 
     if (melodyIndex >= currentMelody->length) {
-      melodyActive = false;   //Stop a melody after one play. Avoids annoying loop of the same song. 
-      melodyFinished = true;
-      noTone(BUZZER_PWM);
-      return;
+      if (currentMelody == &MELODY_SIREN) {
+        melodyIndex = 0; //siren loops forever until reset
+      } else {
+        melodyActive = false;
+        melodyFinished = true;
+        noTone(BUZZER_PWM);
+        return;
+      }
     }
 
     uint16_t pitch = currentMelody->notes[melodyIndex].pitch;
