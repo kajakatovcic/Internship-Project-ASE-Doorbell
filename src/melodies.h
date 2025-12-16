@@ -45,6 +45,89 @@ const Melody MELODY_TETRIS = {
   sizeof(melodyTetris) / sizeof(Note)
 };
 
+//Jingle Bells
+const Note melodyJingleBells[] {
+  {NOTE_E4, 250}, {NOTE_E4, 250}, {NOTE_E4, 500},
+  {NOTE_REST, 50},
+  {NOTE_E4, 250}, {NOTE_E4, 250}, {NOTE_E4, 500},
+  {NOTE_REST, 50},
+  {NOTE_E4, 250}, {NOTE_G4, 250}, {NOTE_C4, 250}, {NOTE_D4, 250}, {NOTE_E4, 1000},
+  {NOTE_REST, 50},
+    
+  {NOTE_F4, 250}, {NOTE_F4, 250}, {NOTE_F4, 250}, {NOTE_F4, 250},
+  {NOTE_F4, 250}, {NOTE_E4, 250}, {NOTE_E4, 250}, {NOTE_E4, 250}, {NOTE_E4, 250},
+  {NOTE_E4, 250}, {NOTE_D4, 250}, {NOTE_D4, 250}, {NOTE_E4, 250}, {NOTE_D4, 500}, {NOTE_G4, 500},
+};
+
+const Melody MELODY_JINGLE_BELLS = {
+  melodyJingleBells,
+  sizeof(melodyJingleBells) / sizeof(Note)
+};
+
+//Fur Elise
+const Note melodyFurElise[]{
+  {NOTE_E5, 250}, {NOTE_DS5, 250}, {NOTE_E5, 250}, {NOTE_DS5, 250},
+  {NOTE_E5, 250}, {NOTE_B4, 250}, {NOTE_D5, 250}, {NOTE_C5, 250},
+  {NOTE_A4, 500}, {NOTE_REST, 100},
+    
+  {NOTE_C4, 250}, {NOTE_E4, 250}, {NOTE_A4, 250}, {NOTE_B4, 250},
+  {NOTE_REST, 100},
+  {NOTE_E4, 250}, {NOTE_GS4, 250}, {NOTE_B4, 250}, {NOTE_C5, 250},
+  {NOTE_REST, 100},
+    
+  {NOTE_E5, 250}, {NOTE_DS5, 250}, {NOTE_E5, 250}, {NOTE_DS5, 250},
+  {NOTE_E5, 250}, {NOTE_B4, 250}, {NOTE_D5, 250}, {NOTE_C5, 250},
+  {NOTE_A4, 500}
+};
+
+const Melody MELODY_FUR_ELISE = {
+  melodyFurElise,
+  sizeof(melodyFurElise) / sizeof(Note)
+};
+
+//Beethoven No. 5
+const Note melodyBeethoven[] = {
+  {NOTE_G4, 250}, {NOTE_G4, 250}, {NOTE_G4, 250}, {NOTE_E4, 250},
+  {NOTE_FS4, 250}, {NOTE_FS4, 250}, {NOTE_FS4, 250}, {NOTE_D4, 750},
+
+  {NOTE_G4, 250}, {NOTE_G4, 250}, {NOTE_G4, 250}, {NOTE_E4, 750},
+  {NOTE_FS4, 250}, {NOTE_FS4, 250}, {NOTE_FS4, 250}, {NOTE_D4, 750},
+
+  {NOTE_E4, 250}, {NOTE_E4, 250}, {NOTE_F4, 250}, {NOTE_G4, 250},
+  {NOTE_G4, 250}, {NOTE_F4, 250}, {NOTE_E4, 250}, {NOTE_D4, 250},
+  {NOTE_REST, 100},
+
+  {NOTE_G4, 250}, {NOTE_G4, 250}, {NOTE_G4, 250}, {NOTE_E4, 750},
+  {NOTE_FS4, 250}, {NOTE_FS4, 250}, {NOTE_FS4, 250}, {NOTE_D4, 750},
+
+};
+
+const Melody MELODY_BEETHOVEN = {
+  melodyBeethoven,
+  sizeof(melodyBeethoven) / sizeof(Note)
+};
+
+const Note melodyRondaTurca[] = {
+  {NOTE_E4, 125}, {NOTE_E4, 125}, {NOTE_E4, 125}, {NOTE_FS4, 125},
+  {NOTE_G4, 125}, {NOTE_FS4, 125}, {NOTE_E4, 125}, {NOTE_D4, 125},
+  {NOTE_C4, 125}, {NOTE_D4, 125}, {NOTE_E4, 125}, {NOTE_C4, 125},
+  {NOTE_A3, 250}, {NOTE_REST, 50},
+
+  {NOTE_A3, 125}, {NOTE_C4, 125}, {NOTE_E4, 125}, {NOTE_A4, 125},
+  {NOTE_G4, 125}, {NOTE_E4, 125}, {NOTE_C4, 125}, {NOTE_A3, 125},
+  {NOTE_REST, 50},
+
+  {NOTE_E4, 125}, {NOTE_E4, 125}, {NOTE_E4, 125}, {NOTE_FS4, 125},
+  {NOTE_G4, 125}, {NOTE_FS4, 125}, {NOTE_E4, 125}, {NOTE_D4, 125},
+  {NOTE_C4, 125}, {NOTE_D4, 125}, {NOTE_E4, 125}, {NOTE_C4, 125},
+  {NOTE_A3, 250}
+};
+
+const Melody MELODY_RONDA {
+  melodyRondaTurca,
+  sizeof(melodyRondaTurca) / sizeof(Note)
+};
+
 //Siren
 const Note melodySiren[] = {
   {NOTE_C5, 200},

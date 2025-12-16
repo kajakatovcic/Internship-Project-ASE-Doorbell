@@ -28,6 +28,8 @@
 #define NOTE_AS5  932
 #define NOTE_B5   988
 
+#define NOTE_A3 220
+
 #define NOTE_REST 0
 
 #endif

@@ -7,6 +7,10 @@
 const Melody *doorPlaylist[] = {
   &MELODY_DOOR,
   &MELODY_TETRIS,
+  &MELODY_JINGLE_BELLS,
+  &MELODY_FUR_ELISE,
+  &MELODY_BEETHOVEN,
+  &MELODY_RONDA,
 };
 
 const uint8_t DOOR_PLAYLIST_LEN =

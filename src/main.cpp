@@ -25,7 +25,7 @@ unsigned long muteStartTime = 0;
 const unsigned long MUTE_TIMEOUT_MS = 5UL * 60UL * 1000UL;
 
 unsigned long pauseStartTime = 0;
-const unsigned long PAUSE_MS = 3000; // 3 seconds pause between melodies
+const unsigned long PAUSE_MS = 3000; // 3 second pause between melodies
 bool inPause = false;
 
 // Setup
@@ -35,7 +35,7 @@ void setup() {
     pinMode(LED_SIREN, OUTPUT);
     pinMode(BUZZER_PWM, OUTPUT);
 
-    pinMode(INPUT_DOOR, INPUT_PULLUP); // NC reed + pull-up
+    pinMode(INPUT_DOOR, INPUT_PULLUP); // Changed for Normally-Closed reed + pull-up
     pinMode(INPUT_MUTE, INPUT);        // external pull-down
     pinMode(INPUT_SIREN, INPUT);       // external pull-down
 
@@ -58,8 +58,8 @@ void loop() {
     updateDebounce(muteBtn);
     updateDebounce(sirenBtn);
 
-    // Semantic door signal: trigger when NC reed reads LOW
-    bool doorOpen = (door.stableState == LOW);
+    // Bool reads TRUE when NC reed reads LOW
+    bool doorOpen = (door.stableState == HIGH);
 
     // FSM
     switch (state) {
@@ -80,7 +80,7 @@ void loop() {
             break;
 
         case STATE_DOOR_ALERT:
-            digitalWrite(LED_DOOR, doorOpen ? HIGH : LOW);
+            digitalWrite(LED_DOOR, doorOpen ? HIGH : LOW); // C++ incorporation: LED output based on doorOpen boolean
             updateMelody();
 
             // Melody finished, pause before next one
@@ -102,7 +102,7 @@ void loop() {
                 state = STATE_IDLE;
             }
 
-            if (muteBtn.stableState == HIGH) {
+            if (muteBtn.stableState == HIGH) { // Mute btn can only be triggered in door open state
                 stopMelody();
                 digitalWrite(LED_MUTE, HIGH);
                 muteStartTime = millis();
@@ -146,6 +146,6 @@ void loop() {
 
         case STATE_SIREN:
             updateMelody();
-            break; // Siren runs until hardware reset
+            break; // Siren runs on endless loop until hardware reset
     }
 }
