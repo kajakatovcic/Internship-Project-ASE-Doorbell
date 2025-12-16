@@ -59,7 +59,7 @@ void loop() {
     updateDebounce(sirenBtn);
 
     // Bool reads TRUE when NC reed reads LOW
-    bool doorOpen = (door.stableState == HIGH);
+    bool doorOpen = (door.stableState == LOW);
 
     // FSM
     switch (state) {
