@@ -5,7 +5,7 @@
 #include "melody_player.h"
 #include "melody_playlist.h"
 
-//Defining States for FSM
+// Defining States for FSM
 enum State {
     STATE_IDLE,
     STATE_DOOR_ALERT,
@@ -15,12 +15,12 @@ enum State {
 
 State state = STATE_IDLE;
 
-//Inputs
+// Inputs
 DebouncedInput door;
 DebouncedInput muteBtn;
 DebouncedInput sirenBtn;
 
-//Timing 
+// Timing
 unsigned long muteStartTime = 0;
 const unsigned long MUTE_TIMEOUT_MS = 5UL * 60UL * 1000UL;
 
@@ -28,16 +28,16 @@ unsigned long pauseStartTime = 0;
 const unsigned long PAUSE_MS = 3000; // 3 seconds pause between melodies
 bool inPause = false;
 
-//Setup
+// Setup
 void setup() {
     pinMode(LED_DOOR, OUTPUT);
     pinMode(LED_MUTE, OUTPUT);
     pinMode(LED_SIREN, OUTPUT);
     pinMode(BUZZER_PWM, OUTPUT);
 
-    pinMode(INPUT_DOOR, INPUT_PULLUP);
-    pinMode(INPUT_MUTE, INPUT);
-    pinMode(INPUT_SIREN, INPUT);
+    pinMode(INPUT_DOOR, INPUT_PULLUP); // NC reed + pull-up
+    pinMode(INPUT_MUTE, INPUT);        // external pull-down
+    pinMode(INPUT_SIREN, INPUT);       // external pull-down
 
     initDebounce(door, INPUT_DOOR);
     initDebounce(muteBtn, INPUT_MUTE);
@@ -50,15 +50,18 @@ void setup() {
     stopMelody();
 }
 
-//Main Loop
+// Main Loop
 void loop() {
 
-    //Updating inputs using debouncer
+    // Update inputs using debouncer
     updateDebounce(door);
     updateDebounce(muteBtn);
     updateDebounce(sirenBtn);
 
-    //FSM
+    // Semantic door signal: trigger when NC reed reads LOW
+    bool doorOpen = (door.stableState == LOW);
+
+    // FSM
     switch (state) {
 
         case STATE_IDLE:
@@ -68,7 +71,8 @@ void loop() {
                 state = STATE_SIREN;
                 break;
             }
-            if (door.stableState == HIGH) {
+
+            if (doorOpen) {
                 playMelodyOnce(getNextDoorMelody());
                 digitalWrite(LED_DOOR, HIGH);
                 state = STATE_DOOR_ALERT;
@@ -76,24 +80,22 @@ void loop() {
             break;
 
         case STATE_DOOR_ALERT:
-            digitalWrite(LED_DOOR, door.stableState);
+            digitalWrite(LED_DOOR, doorOpen ? HIGH : LOW);
             updateMelody();
 
-            //Melody finished, 3 second pause between next in queue
-            if (isMelodyFinished() && door.stableState) {
+            // Melody finished, pause before next one
+            if (isMelodyFinished() && doorOpen) {
                 if (!inPause) {
-                    //Pause starts
                     inPause = true;
                     pauseStartTime = millis();
                     stopMelody();
                 } else if (millis() - pauseStartTime >= PAUSE_MS) {
-                    //Pause finished, play next melody
                     inPause = false;
                     playMelodyOnce(getNextDoorMelody());
                 }
             }
 
-            if (!door.stableState) {
+            if (!doorOpen) {
                 stopMelody();
                 digitalWrite(LED_DOOR, LOW);
                 inPause = false;
@@ -110,7 +112,7 @@ void loop() {
 
             if (sirenBtn.stableState == HIGH) {
                 stopMelody();
-                playMelodyOnce(MELODY_SIREN);
+                playMelodyLoop(MELODY_SIREN);
                 digitalWrite(LED_SIREN, HIGH);
                 inPause = false;
                 state = STATE_SIREN;
@@ -118,15 +120,15 @@ void loop() {
             break;
 
         case STATE_MUTED:
-            digitalWrite(LED_DOOR, door.stableState);
+            digitalWrite(LED_DOOR, doorOpen ? HIGH : LOW);
 
-            if (!door.stableState) {
+            if (!doorOpen) {
                 digitalWrite(LED_MUTE, LOW);
                 inPause = false;
                 state = STATE_IDLE;
             }
 
-            if (millis() - muteStartTime >= MUTE_TIMEOUT_MS && door.stableState) {
+            if (millis() - muteStartTime >= MUTE_TIMEOUT_MS && doorOpen) {
                 digitalWrite(LED_MUTE, LOW);
                 playMelodyOnce(getNextDoorMelody());
                 inPause = false;
@@ -135,7 +137,7 @@ void loop() {
 
             if (sirenBtn.stableState == HIGH) {
                 digitalWrite(LED_MUTE, LOW);
-                playMelodyOnce(MELODY_SIREN);
+                playMelodyLoop(MELODY_SIREN);
                 digitalWrite(LED_SIREN, HIGH);
                 inPause = false;
                 state = STATE_SIREN;
@@ -143,7 +145,7 @@ void loop() {
             break;
 
         case STATE_SIREN:
-            updateMelody(); 
-            break; //Siren will loop forever until hardware reset
+            updateMelody();
+            break; // Siren runs until hardware reset
     }
 }
