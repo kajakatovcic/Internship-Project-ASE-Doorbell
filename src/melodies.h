@@ -29,6 +29,80 @@ const Melody MELODY_DOOR = {
   sizeof(melodyDoor) / sizeof(Note)
 };
 
+//Toreador
+const Note melodyToreador[] = {
+  {NOTE_G4, 400}, {NOTE_REST, 80},
+  {NOTE_G4, 200}, {NOTE_REST, 40},
+  {NOTE_G4, 200}, {NOTE_REST, 40},
+  {NOTE_E4, 400}, {NOTE_REST, 100},
+
+  {NOTE_G4, 400}, {NOTE_REST, 80},
+  {NOTE_A4, 200}, {NOTE_REST, 40},
+  {NOTE_G4, 200}, {NOTE_REST, 40},
+  {NOTE_E4, 500}, {NOTE_REST, 150},
+
+  {NOTE_C4, 400}, {NOTE_REST, 80},
+  {NOTE_E4, 200}, {NOTE_REST, 40},
+  {NOTE_G4, 400}, {NOTE_REST, 80},
+  {NOTE_A4, 400}, {NOTE_REST, 100},
+
+  {NOTE_G4, 400}, {NOTE_REST, 80},
+  {NOTE_E4, 200}, {NOTE_REST, 40},
+  {NOTE_C4, 600}, {NOTE_REST, 250},
+
+  {NOTE_E4, 250}, {NOTE_REST, 50},
+  {NOTE_G4, 250}, {NOTE_REST, 50},
+  {NOTE_A4, 400}, {NOTE_REST, 100},
+  {NOTE_G4, 600}, {NOTE_REST, 400}
+};
+
+const Melody MELODY_TOREADOR = {
+  melodyToreador,
+  sizeof(melodyToreador) / sizeof(Note)
+};
+
+//Spiderman theme
+const Note melodySpiderMan[] = {
+  {NOTE_E4, 200}, {NOTE_REST, 40},
+  {NOTE_G4, 200}, {NOTE_REST, 40},
+  {NOTE_A4, 400}, {NOTE_REST, 80},
+
+  {NOTE_G4, 200}, {NOTE_REST, 40},
+  {NOTE_E4, 200}, {NOTE_REST, 40},
+  {NOTE_D4, 500}, {NOTE_REST, 150},
+
+  {NOTE_E4, 200}, {NOTE_REST, 40},
+  {NOTE_G4, 200}, {NOTE_REST, 40},
+  {NOTE_A4, 200}, {NOTE_REST, 40},
+  {NOTE_B4, 300}, {NOTE_REST, 60},
+
+  {NOTE_A4, 200}, {NOTE_REST, 40},
+  {NOTE_G4, 200}, {NOTE_REST, 40},
+  {NOTE_E4, 500}, {NOTE_REST, 200},
+
+  {NOTE_A4, 250}, {NOTE_REST, 60},
+  {NOTE_C5, 250}, {NOTE_REST, 60},
+  {NOTE_B4, 400}, {NOTE_REST, 80},
+
+  {NOTE_A4, 200}, {NOTE_REST, 40},
+  {NOTE_G4, 200}, {NOTE_REST, 40},
+  {NOTE_E4, 500}, {NOTE_REST, 200},
+
+  {NOTE_G4, 200}, {NOTE_REST, 40},
+  {NOTE_A4, 200}, {NOTE_REST, 40},
+  {NOTE_B4, 250}, {NOTE_REST, 60},
+  {NOTE_C5, 250}, {NOTE_REST, 60},
+
+  {NOTE_B4, 250}, {NOTE_REST, 60},
+  {NOTE_A4, 250}, {NOTE_REST, 60},
+  {NOTE_G4, 600}, {NOTE_REST, 400}
+};
+
+const Melody MELODY_SPIDERMAN {
+  melodySpiderMan,
+  sizeof(melodySpiderMan) / sizeof(Note)
+};
+
 //Tetris
 const Note melodyTetris[] = {
   {NOTE_E5, 400}, {NOTE_B4, 200}, {NOTE_C5, 200},

@@ -5,7 +5,8 @@
 
 //Doorbell playlist (cycle through these)
 const Melody *doorPlaylist[] = {
-  &MELODY_DOOR,
+  &MELODY_TOREADOR,
+  &MELODY_SPIDERMAN,
   &MELODY_TETRIS,
   &MELODY_JINGLE_BELLS,
   &MELODY_FUR_ELISE,
